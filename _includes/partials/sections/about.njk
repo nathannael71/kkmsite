@@ -1,0 +1,62 @@
+<section id="about" class="py-16 section-gradient-1 gradient-section">
+    <div class="main-container">
+        <div class="text-center mb-16">
+            <span class="text-sm uppercase tracking-wider text-blue-500 dark:text-blue-300">
+                {{ settings.aboutSettings.sectionLabel | default('Tentang Kami') }}
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-bold heading-apple text-apple-darkgray dark:text-white mb-6 fade-up">
+                {{ settings.aboutSettings.title | default('Why We Born?') }}
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto fade-up">
+                {{ settings.aboutSettings.description | default('Kami hadir untuk menjembatani aspirasi dan peluang Anda. Baik itu pengembangan karir, ekspresi kreatif, atau jaringan profesional, misi kami adalah mendukung mahasiswa dalam menemukan passion dan mencapai tujuan mereka.') }}
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% if collections.aboutItems %}
+                {% for item in collections.aboutItems | sort(false, false, 'data.order') %}
+                    <div class="bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg transition-apple transform hover:-translate-y-2 fade-up border border-white/20">
+                        <div class="w-16 h-16 bg-{{ item.data.iconBg | default('blue-500') }} rounded-full flex items-center justify-center mb-6">
+                            <i class="fas {{ item.data.icon | default('fa-graduation-cap') }} text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold heading-apple text-apple-darkgray dark:text-white mb-4">{{ item.data.contentTitle }}</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            {{ item.data.description }}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default about items if no CMS data -->
+                <div class="bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg transition-apple transform hover:-translate-y-2 fade-up border border-white/20">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold heading-apple text-apple-darkgray dark:text-white mb-4">Skill Development</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Memberikan pelatihan dan sumber daya untuk mengembangkan keterampilan teknis dan soft skill yang relevan dengan kebutuhan dunia kerja modern.
+                    </p>
+                </div>
+                
+                <div class="bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg transition-apple transform hover:-translate-y-2 fade-up border border-white/20">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-paintbrush text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold heading-apple text-apple-darkgray dark:text-white mb-4">Creative Outlet</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Menyediakan platform bagi mahasiswa untuk mengekspresikan kreativitas mereka melalui berbagai proyek dan kolaborasi yang inovatif.
+                    </p>
+                </div>
+                
+                <div class="bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg transition-apple transform hover:-translate-y-2 fade-up border border-white/20">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-network-wired text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold heading-apple text-apple-darkgray dark:text-white mb-4">Career Networking</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Menghubungkan mahasiswa dengan profesional industri dan pemberi kerja potensial untuk memfasilitasi peluang karir yang berkelanjutan.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
