@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"tinacms dev -c \"tina/config.js\"\" \"eleventy --serve\"",
-    "build": "tinacms build && eleventy",
+    "build": "npx tinacms build && npx eleventy",
     "start": "eleventy --serve"
   },
   "keywords": ["eleventy", "tinacms", "kkm", "bem", "uny"],
