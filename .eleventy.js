@@ -51,10 +51,10 @@ module.exports = function(eleventyConfig) {
   // Konfigurasi utama Eleventy
   return {
     dir: {
-      input: ".",
+      input: "src",
       output: "_site",
-      includes: "_includes",
-      data: "_data"
+      includes: "../_includes",
+      data: "../_data"
     },
     templateFormats: ["njk", "html", "json"],
     markdownTemplateEngine: "njk",
