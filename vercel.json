@@ -1,12 +1,19 @@
 {
-  "framework": "eleventy",
-  "buildCommand": "npm run build",
-  "outputDirectory": "_site",
-  "installCommand": "npm install",
-  "devCommand": "npm run dev",
-  "github": {
-    "silent": true
-  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "_site"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
   "env": {
     "TINA_CLIENT_ID": "@tina_client_id",
     "TINA_TOKEN": "@tina_token"
