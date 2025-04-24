@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ settings.title | default('Karir dan Karya Mahasiswa | BEM KM UNY') }}</title>
+    <meta name="description" content="{{ settings.description | default('Departemen Karir dan Karya Mahasiswa BEM KM Universitas Negeri Yogyakarta - Empowering students through career development and creative outlets') }}">
+    <meta name="keywords" content="BEM KM UNY, Karir Mahasiswa, Karya Mahasiswa, UNY, Universitas Negeri Yogyakarta">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'sans-serif'],
+                    },
+                    colors: {
+                        apple: {
+                            blue: '#0071e3',
+                            gray: '#86868b',
+                            darkgray: '#1d1d1f',
+                            lightgray: '#f5f5f7',
+                        }
+                    },
+                    transitionTimingFunction: {
+                        'apple': 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+                    },
+                    backdropBlur: {
+                        'apple': '20px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SwiperJS for carousels -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #86868b;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0071e3;
+        }
+        
+        /* Container with proper spacing */
+        .main-container {
+            width: 85%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1200px;
+        }
+        
+        @media (max-width: 1280px) {
+            .main-container {
+                width: 90%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                width: 92%;
+            }
+        }
+        
+        /* Apple-like text styling */
+        .heading-apple {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        .subheading-apple {
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Apple-like transitions */
+        .transition-apple {
+            transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        /* Glassmorphism for menu */
+        .glassmorphism {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        /* Image hover zoom effect */
+        .img-zoom {
+            transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        .img-zoom:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Parallax effects */
+        .parallax {
+            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            will-change: transform;
+        }
+        
+        /* Team member social buttons animation */
+        .team-social-buttons {
+            position: absolute;
+            bottom: 16px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            pointer-events: none;
+        }
+        
+        .team-card.active .team-btn {
+            transform: translateY(-60px);
+            background-color: transparent;
+            color: transparent;
+            box-shadow: none;
+        }
+        
+        .team-card.active .team-social-buttons {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        /* Apple-style gradient backgrounds - Light Mode */
+        .section-gradient-1 {
+            background: linear-gradient(180deg, #F5F5F7 0%, #E8E8ED 100%);
+        }
+        
+        .section-gradient-2 {
+            background: linear-gradient(180deg, #E8F0F9 0%, #D8E4F0 100%);
+        }
+        
+        .section-gradient-3 {
+            background: linear-gradient(180deg, #F0F0F5 0%, #E0E0E8 100%);
+        }
+        
+        .section-gradient-4 {
+            background: linear-gradient(180deg, #F9F9F9 0%, #EFEFEF 100%);
+        }
+        
+        .section-gradient-5 {
+            background: linear-gradient(180deg, #F0F5F9 0%, #E0EAF0 100%);
+        }
+        
+        /* Apple-style gradient backgrounds - Dark Mode */
+        .dark .section-gradient-1 {
+            background: linear-gradient(180deg, #1D1D1F 0%, #121215 100%);
+        }
+        
+        .dark .section-gradient-2 {
+            background: linear-gradient(180deg, #151A20 0%, #101318 100%);
+        }
+        
+        .dark .section-gradient-3 {
+            background: linear-gradient(180deg, #1A1A22 0%, #12121A 100%);
+        }
+        
+        .dark .section-gradient-4 {
+            background: linear-gradient(180deg, #181818 0%, #0F0F0F 100%);
+        }
+        
+        .dark .section-gradient-5 {
+            background: linear-gradient(180deg, #121620 0%, #0A0D14 100%);
+        }
+        
+        /* Timeline styles */
+        .timeline-node {
+            position: relative;
+        }
+        
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 24px;
+            height: calc(100% - 24px);
+            width: 2px;
+            background-color: #0071e3;
+        }
+        
+        .timeline-node:last-child::before {
+            display: none;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -44px;
+            top: 24px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #0071e3;
+            z-index: 2;
+        }
+        
+        /* Apple-style button hover effect */
+        .btn-apple:hover {
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.2);
+        }
+        
+        /* Dark mode specific styles */
+        .dark .glassmorphism {
+            background-color: rgba(30, 30, 30, 0.7);
+        }
+        
+        .light .glassmorphism {
+            background-color: rgba(250, 250, 250, 0.7);
+        }
+        
+        /* Animation classes */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        
+        /* Menu toggle animations */
+        .hamburger-line {
+            transition: transform 0.3s ease, opacity 0.2s ease;
+        }
+        
+        .menu-open .line-1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .menu-open .line-2 {
+            opacity: 0;
+        }
+        
+        .menu-open .line-3 {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        /* Accordion styles - Improved for smoother transitions */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding-top 0.4s ease, padding-bottom 0.4s ease;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .accordion-active .accordion-content {
+            max-height: 600px;
+            padding-top: 0.5rem;
+            padding-bottom: 1rem;
+        }
+        
+        .accordion-icon {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .accordion-active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Apple-style accordion */
+        .apple-accordion {
+            border-radius: 30px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .apple-accordion-header {
+            padding: 15px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hero slider */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        
+        /* Section gradients */
+        .gradient-section {
+            position: relative;
+        }
+        
+        .gradient-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2));
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .dark .gradient-section::after {
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
+        }
+        
+        /* Team carousel - UPDATED for better sizing & centering */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .team-carousel .swiper-slide {
+            width: 280px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Album carousel - Enhanced for larger centered images - UPDATED */
+        .album-carousel-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .album-carousel .swiper-slide {
+            width: 75%; /* Increased size for larger images */
+            opacity: 0.3;
+            transform: scale(0.85);
+            transition: all 0.6s ease;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .album-carousel .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .gallery-img-container {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        /* Articles carousel - UPDATED for better sizing & centering */
+        .article-carousel-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .article-carousel .swiper-slide {
+            width: 320px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Sidebar overlay */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            z-index: 39;
+        }
+        
+        .sidebar-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Mobile sidebar menu */
+        #sidebar-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%;
+            max-width: 320px;
+            height: 100vh;
+            transform: translateX(100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background-color: rgba(28, 28, 30, 0.8);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 50;
+            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        /* This is the key class that makes the sidebar appear */
+        #sidebar-menu.translate-x-0 {
+            transform: translateX(0);
+        }
+        
+        #sidebar-menu .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        #sidebar-menu .close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        #sidebar-menu .sidebar-header {
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+        }
+        
+        #sidebar-menu .menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        /* Improved sidebar links for better readability */
+        #sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .dark #sidebar-menu a {
+            color: white;
+        }
+        
+        #sidebar-menu .menu-icon {
+            background-color: #2871e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+        }
+        
+        #sidebar-menu #darkmode-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(60, 60, 67, 0.5);
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        #sidebar-menu #darkmode-toggle-container span {
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Program card with more rounded corners */
+        .program-card {
+            border-radius: 24px;
+        }
+        
+        /* Editable content classes */
+        [contenteditable="true"]:focus {
+            outline: 2px solid #0071e3;
+            border-radius: 4px;
+            padding: 2px;
+        }
+        
+        /* Swiper pagination custom styles */
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background-color: #0071e3;
+            opacity: 0.3;
+        }
+        
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+        
+        /* Apple-style hero section */
+        .hero-apple {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .hero-apple-text {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+        
+        .hero-apple-title {
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #2c88d9, #d387ab);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-apple-subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-apple-title {
+                font-size: 32px;
+            }
+            
+            .hero-apple-subtitle {
+                font-size: 18px;
+            }
+            
+            #sidebar-menu {
+                width: 75%;
+            }
+            
+            /* Smaller fonts for mobile */
+            h1, .text-4xl, .text-5xl, .text-6xl, .text-7xl {
+                font-size: 28px !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2, .text-3xl {
+                font-size: 22px !important;
+                line-height: 1.2 !important;
+            }
+            
+            h3, .text-xl, .text-2xl {
+                font-size: 18px !important;
+                line-height: 1.3 !important;
+            }
+            
+            p, .text-base, .text-lg {
+                font-size: 14px !important;
+                line-height: 1.4 !important;
+            }
+            
+            .text-sm {
+                font-size: 12px !important;
+            }
+            
+            .text-xs {
+                font-size: 10px !important;
+            }
+            
+            /* Button text adjustment for mobile */
+            button, .btn-apple {
+                font-size: 14px !important;
+            }
+            
+            /* Menu text adjustments */
+            #sidebar-menu a {
+                font-size: 14px !important;
+            }
+            
+            #sidebar-menu .menu-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+            
+            /* Adjust container paddings for better mobile spacing */
+            .container, .main-container {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+            
+            /* Make form inputs more mobile-friendly */
+            input, textarea, select {
+                font-size: 14px !important;
+                padding: 0.5rem !important;
+            }
+        }
+        
+        /* Fixed size article cards */
+        .article-card {
+            height: 420px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .article-img-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .article-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Container for consistent padding */
+        .container {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding-left: 2.5rem;
+                padding-right: 2.5rem;
+            }
+        }
+        
+        /* Custom accordion arrow style */
+        .custom-accordion-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(0, 113, 227, 0.1);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+            color: #0071e3;
+        }
+        
+        .dark .custom-accordion-arrow {
+            background-color: rgba(0, 113, 227, 0.2);
+        }
+        
+        .accordion-active .custom-accordion-arrow {
+            transform: rotate(180deg);
+            background-color: rgba(0, 113, 227, 0.2);
+        }
+        
+        /* Footer styles - UPDATED */
+        footer {
+            font-size: 14px;
+        }
+        
+        footer h3, footer h4 {
+            font-size: 16px;
+        }
+        
+        footer .text-xl {
+            font-size: 16px !important;
+        }
+        
+        footer .text-lg {
+            font-size: 15px !important; 
+        }
+        
+        footer p, footer a, footer li {
+            font-size: 13px !important;
+        }
+        
+        footer .text-sm {
+            font-size: 12px !important;
+        }
+        
+        footer .text-xs {
+            font-size: 11px !important;
+        }
+        
+        /* Map container styles - UPDATED - Custom rounded corners */
+        .map-container {
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+            height: 450px;
+            position: relative;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 0;
+        }
+        
+        /* Form success and error messages */
+        .form-alert {
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #10b981;
+        }
+        
+        .alert-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+        }
+        
+        .form-alert i {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-apple-darkgray text-apple-darkgray dark:text-white transition-colors duration-500 overflow-x-hidden">
+    <!-- Scroll to top button -->
+    <button id="scroll-to-top" class="fixed bottom-8 right-8 z-50 bg-apple-blue text-white p-3 rounded-full shadow-lg transition-apple opacity-0 pointer-events-none w-12 h-12 flex items-center justify-center">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    {% include "partials/header.njk" %}
+    
+    <main>
+        {{ content | safe }}
+    </main>
+    
+    {% include "partials/footer.njk" %}
+
+    <script>
+        // Initialize on document load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dark mode setup
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
+            
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (event.matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+                updateHeaderClass();
+            });
+            
+            // Dark mode toggle
+            const darkmodeToggle = document.getElementById('darkmode-toggle');
+            darkmodeToggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+                updateHeaderClass();
+            });
+            
+            // Mobile menu toggle - Fixed to work with both hamburger and X button
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebarClose = document.getElementById('sidebar-close');
+            const sidebarMenu = document.getElementById('sidebar-menu');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+            
+            // Open menu when clicking hamburger
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.add('menu-open');
+                sidebarMenu.classList.add('translate-x-0');
+                sidebarOverlay.classList.add('active');
+                document.body.classList.add('overflow-hidden');
+            });
+            
+            // Close menu when clicking X button
+            sidebarClose.addEventListener('click', function() {
+                menuToggle.classList.remove('menu-open');
+                sidebarMenu.classList.remove('translate-x-0');
+                sidebarOverlay.classList.remove('active');
+                document.body.classList.remove('overflow-hidden');
+            });
+            
+            // Close menu when clicking overlay
+            sidebarOverlay.addEventListener('click', function() {
+                menuToggle.classList.remove('menu-open');
+                sidebarMenu.classList.remove('translate-x-0');
+                sidebarOverlay.classList.remove('active');
+                document.body.classList.remove('overflow-hidden');
+            });
+            
+            // Close menu when clicking a link
+            const menuLinks = document.querySelectorAll('#sidebar-menu a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('menu-open');
+                    sidebarMenu.classList.remove('translate-x-0');
+                    sidebarOverlay.classList.remove('active');
+                    document.body.classList.remove('overflow-hidden');
+                });
+            });
+            
+            // Accordion functionality - Improved for smoother transitions
+            const accordionHeaders = document.querySelectorAll('.apple-accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const accordion = this.parentElement;
+                    const wasActive = accordion.classList.contains('accordion-active');
+                    
+                    // Close all accordions first
+                    document.querySelectorAll('.apple-accordion').forEach(acc => {
+                        acc.classList.remove('accordion-active');
+                    });
+                    
+                    // If it wasn't active before, activate it
+                    if (!wasActive) {
+                        accordion.classList.add('accordion-active');
+                    }
+                });
+            });
+            
+            // Smooth scroll for "Learn More" button
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Hero slider functionality
+            const heroSlides = document.querySelectorAll('.hero-slide');
+            const heroDots = document.querySelectorAll('.hero-nav-dot');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                heroSlides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                heroDots.forEach(dot => {
+                    dot.classList.remove('opacity-100');
+                    dot.classList.add('opacity-50');
+                });
+                
+                // Show the selected slide
+                heroSlides[index].classList.add('active');
+                
+                // Highlight the corresponding dot
+                heroDots[index].classList.remove('opacity-50');
+                heroDots[index].classList.add('opacity-100');
+                
+                // Update current slide index
+                currentSlide = index;
+            }
+            
+            // Function to advance to the next slide
+            function nextSlide() {
+                let next = currentSlide + 1;
+                if (next >= heroSlides.length) {
+                    next = 0;
+                }
+                showSlide(next);
+            }
+            
+            // Start automatic slideshow
+            function startSlideshow() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // Add click event to dots
+            heroDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    clearInterval(slideInterval);
+                    showSlide(index);
+                    startSlideshow();
+                });
+            });
+            
+            // Initialize the first slide and start slideshow
+            if (heroSlides.length > 0) {
+                showSlide(0);
+                startSlideshow();
+            }
+            
+            // Initialize Swiper carousels - UPDATED for better sizing & centering
+            if (typeof Swiper !== 'undefined') {
+                // Team carousel - UPDATED
+                const teamCarouselElement = document.querySelector('.team-carousel');
+                if (teamCarouselElement) {
+                    const teamCarousel = new Swiper('.team-carousel', {
+                        slidesPerView: 'auto',
+                        spaceBetween: 20,
+                        centeredSlides: false,
+                        loop: false,
+                        pagination: {
+                            el: '.team-carousel .swiper-pagination',
+                            clickable: true,
+                        },
+                        breakpoints: {
+                            640: {
+                                slidesPerView: 2,
+                                centeredSlides: false,
+                            },
+                            768: {
+                                slidesPerView: 3,
+                                centeredSlides: false,
+                            },
+                            1024: {
+                                slidesPerView: 4,
+                                centeredSlides: false,
+                            },
+                        },
+                    });
+                }
+                
+                // Album carousel - UPDATED for larger centered images
+                const albumCarouselElement = document.querySelector('.album-carousel');
+                if (albumCarouselElement) {
+                    const albumCarousel = new Swiper('.album-carousel', {
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                        centeredSlides: true,
+                        loop: true,
+                        loopedSlides: 3,
+                        speed: 800,
+                        effect: 'slide',
+                        grabCursor: true,
+                        pagination: {
+                            el: '.album-carousel .swiper-pagination',
+                            clickable: true,
+                        },
+                        breakpoints: {
+                            640: {
+                                slidesPerView: 'auto',
+                            },
+                        },
+                    });
+                }
+                
+                // Articles carousel - UPDATED
+                const articleCarouselElement = document.querySelector('.article-carousel');
+                if (articleCarouselElement) {
+                    const articleCarousel = new Swiper('.article-carousel', {
+                        slidesPerView: 'auto',
+                        spaceBetween: 20,
+                        centeredSlides: false,
+                        loop: false,
+                        pagination: {
+                            el: '.article-carousel .swiper-pagination',
+                            clickable: true,
+                        },
+                        breakpoints: {
+                            640: {
+                                slidesPerView: 2,
+                                centeredSlides: false,
+                            },
+                            1024: {
+                                slidesPerView: 3,
+                                centeredSlides: false,
+                            },
+                        },
+                    });
+                }
+            }
+            
+            // Team member card social buttons toggle
+            const teamButtons = document.querySelectorAll('.team-card .team-btn');
+            teamButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const teamCard = this.closest('.team-card');
+                    
+                    // First close all other team cards
+                    document.querySelectorAll('.team-card.active').forEach(card => {
+                        if (card !== teamCard) {
+                            card.classList.remove('active');
+                        }
+                    });
+                    
+                    // Then toggle the current team card
+                    teamCard.classList.toggle('active');
+                });
+            });
+            
+            // Close team social buttons when clicking elsewhere
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.team-card')) {
+                    document.querySelectorAll('.team-card.active').forEach(card => {
+                        card.classList.remove('active');
+                    });
+                }
+            });
+            
+            // Scroll to top button
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.remove('opacity-0');
+                    scrollToTopBtn.classList.add('opacity-100');
+                    scrollToTopBtn.classList.remove('pointer-events-none');
+                } else {
+                    scrollToTopBtn.classList.remove('opacity-100');
+                    scrollToTopBtn.classList.add('opacity-0');
+                    scrollToTopBtn.classList.add('pointer-events-none');
+                }
+            });
+            
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Update header glass effect class
+            function updateHeaderClass() {
+                const header = document.querySelector('header');
+                if (document.documentElement.classList.contains('dark')) {
+                    header.classList.remove('light');
+                    header.classList.add('dark');
+                } else {
+                    header.classList.remove('dark');
+                    header.classList.add('light');
+                }
+            }
+            
+            // Initialize GSAP animations if available
+            if (typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                // Fade up animations
+                const fadeUpElements = document.querySelectorAll('.fade-up');
+                fadeUpElements.forEach(element => {
+                    gsap.fromTo(element, 
+                        { opacity: 0, y: 30 },
+                        { 
+                            opacity: 1, 
+                            y: 0, 
+                            duration: 0.8, 
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: element,
+                                start: "top 90%",
+                                toggleActions: "play none none none"
+                            }
+                        }
+                    );
+                });
+            } else {
+                // Fallback for when GSAP isn't available
+                document.querySelectorAll('.fade-up, .slide-in-right, .slide-in-left').forEach(el => {
+                    el.style.opacity = 1;
+                    el.style.transform = 'none';
+                });
+            }
+
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            const formSuccess = document.getElementById('form-success');
+            const formError = document.getElementById('form-error');
+            const submitButton = document.getElementById('submit-button');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    // If no action attribute, prevent default and show demo success message
+                    if (!contactForm.hasAttribute('action')) {
+                        e.preventDefault();
+                        
+                        // Show loading state
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Sending...';
+                        
+                        // Simulate form submission
+                        setTimeout(() => {
+                            // Show success message
+                            formSuccess.classList.remove('hidden');
+                            contactForm.reset();
+                            
+                            // Reset button state
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Send Message';
+                            
+                            // Hide success message after 5 seconds
+                            setTimeout(() => {
+                                formSuccess.classList.add('hidden');
+                            }, 5000);
+                        }, 1500);
+                    }
+                });
+            }
+
+            // Share location function
+            window.shareLocation = function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'KKM BEM UNY Location',
+                        text: 'Check out the location of Karir dan Karya Mahasiswa BEM KM UNY',
+                        url: 'https://maps.google.com/?q=Universitas+Negeri+Yogyakarta'
+                    })
+                    .catch(error => console.error('Error sharing location:', error));
+                } else {
+                    alert('Web Share API not supported on this browser. Try copying the URL instead.');
+                }
+            };
+        });
+    </script>
+</body>
+</html>
