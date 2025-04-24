@@ -4,7 +4,7 @@
   "description": "Karir dan Karya Mahasiswa BEM KM UNY Website",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"tinacms dev -c \"tina/config.js\"\" \"eleventy --serve\"",
+    "dev": "concurrently \"npx tinacms dev -c tina/config.js\" \"npx eleventy --serve\"",
     "build": "npx tinacms build && npx eleventy",
     "start": "eleventy --serve"
   },
