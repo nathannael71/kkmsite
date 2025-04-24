@@ -2,7 +2,8 @@ module.exports = function(eleventyConfig) {
   // Pass-through file copy untuk assets dan admin panel
   eleventyConfig.addPassthroughCopy("public");
   eleventyConfig.addPassthroughCopy("admin");
-
+  eleventyConfig.addPassthroughCopy("content");
+  
   // Untuk memproses konten JSON
   eleventyConfig.addDataExtension("json", contents => JSON.parse(contents));
 
