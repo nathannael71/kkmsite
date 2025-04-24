@@ -58,5 +58,13 @@
         </div>
       {% endif %}
     </div>
+<h2 class="text-xl mt-10">DEBUG CHECK:</h2>
+<ul>
+  {% for item in collections.aboutItems %}
+    <li>{{ item.data.contentTitle or "No title" }}</li>
+  {% else %}
+    <li><strong>Tidak ada data ditemukan</strong></li>
+  {% endfor %}
+</ul>
   </div>
 </section>
