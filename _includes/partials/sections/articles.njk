@@ -1,0 +1,133 @@
+<section id="articles" class="py-16 section-gradient-4 gradient-section">
+    <div class="main-container">
+        <div class="text-center mb-16">
+            <span class="text-sm uppercase tracking-wider text-purple-500 dark:text-purple-300">
+                {{ settings.articlesSettings.sectionLabel | default('Artikel Terbaru') }}
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-bold heading-apple text-apple-darkgray dark:text-white mb-6 fade-up">
+                {{ settings.articlesSettings.title | default('Latest Articles') }}
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto fade-up">
+                {{ settings.articlesSettings.description | default('Wawasan, cerita, dan sumber daya untuk membantu Anda dalam perjalanan karir.') }}
+            </p>
+        </div>
+        
+        <!-- Articles carousel -->
+        <div class="article-carousel-container fade-up">
+            <div class="swiper article-carousel">
+                <div class="swiper-wrapper pb-10">
+                    {% if collections.articles %}
+                        {% for article in collections.articles | sort(false, false, 'data.order') %}
+                            <div class="swiper-slide">
+                                <div class="article-card bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg transition-apple border border-white/20">
+                                    <div class="article-img-container">
+                                        <img src="{{ article.data.image }}" alt="{{ article.data.title }}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="article-content p-6">
+                                        <div class="flex items-center mb-4">
+                                            <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                                                <img src="{{ article.data.authorPhoto }}" alt="{{ article.data.author }}" class="w-full h-full object-cover">
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-apple-darkgray dark:text-white">{{ article.data.author }}</p>
+                                                <p class="text-xs text-gray-600 dark:text-gray-300">{{ article.data.date | date("MMMM DD, YYYY") }}</p>
+                                            </div>
+                                        </div>
+                                        <h3 class="text-lg font-bold heading-apple mb-3 text-apple-darkgray dark:text-white">{{ article.data.title }}</h3>
+                                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                                            {{ article.data.excerpt }}
+                                        </p>
+                                        <div class="mt-auto">
+                                            <a href="/article/{{ article.data.slug }}" class="text-blue-500 dark:text-blue-300 font-medium inline-flex items-center">
+                                                Read Article
+                                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <!-- Default articles if no CMS data -->
+                        <div class="swiper-slide">
+                            <div class="article-card bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg transition-apple border border-white/20">
+                                <div class="article-img-container">
+                                    <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1147&amp;q=80" alt="Article thumbnail" class="w-full h-full object-cover">
+                                </div>
+                                <div class="article-content p-6">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=761&amp;q=80" alt="Author" class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium text-apple-darkgray dark:text-white">Sarah Johnson</p>
+                                            <p class="text-xs text-gray-600 dark:text-gray-300">June 15, 2024</p>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-lg font-bold heading-apple mb-3 text-apple-darkgray dark:text-white">How to Build a Professional Network While in College</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                                        Learn effective strategies for building a professional network that will serve you well after graduation.
+                                    </p>
+                                    <div class="mt-auto">
+                                        <a href="#" class="text-blue-500 dark:text-blue-300 font-medium inline-flex items-center">
+                                            Read Article
+                                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide">
+                            <div class="article-card bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg transition-apple border border-white/20">
+                                <div class="article-img-container">
+                                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="Article thumbnail" class="w-full h-full object-cover">
+                                </div>
+                                <div class="article-content p-6">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                                            <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=387&amp;q=80" alt="Author" class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium text-apple-darkgray dark:text-white">Michael Brown</p>
+                                            <p class="text-xs text-gray-600 dark:text-gray-300">May 28, 2024</p>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-lg font-bold heading-apple mb-3 text-apple-darkgray dark:text-white">The Top Skills Employers Are Looking For in 2024</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                                        Discover the most in-demand skills in today's job market and how you can develop them.
+                                    </p>
+                                    <div class="mt-auto">
+                                        <a href="#" class="text-blue-500 dark:text-blue-300 font-medium inline-flex items-center">
+                                            Read Article
+                                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Add pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        
+        <!-- View all articles button -->
+        <div class="text-center mt-10">
+            <a href="{{ settings.articlesSettings.viewAllButtonUrl | default('/articles') }}" class="inline-flex items-center px-6 py-3 bg-white/20 dark:bg-white/10 backdrop-blur-lg text-apple-darkgray dark:text-white rounded-full shadow-lg transition-apple hover:bg-white/30 dark:hover:bg-white/20 border border-white/20">
+                {{ settings.articlesSettings.viewAllButtonText | default('View All Articles') }}
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
