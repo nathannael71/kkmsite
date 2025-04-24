@@ -11,6 +11,13 @@
                 {{ settings.aboutSettings.description | default('Kami hadir untuk menjembatani aspirasi dan peluang Anda. Baik itu pengembangan karir, ekspresi kreatif, atau jaringan profesional, misi kami adalah mendukung mahasiswa dalam menemukan passion dan mencapai tujuan mereka.') }}
             </p>
         </div>
+        <!-- DEBUG LIST HERE -->
+        <h2>Debug List:</h2>
+        <ul>
+          {% for item in collections.aboutItems %}
+             <li>{{ item.contentTitle or item.title }}</li>
+          {% endfor %}
+         </ul>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {% if collections.aboutItems %}
