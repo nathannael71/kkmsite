@@ -1,0 +1,22 @@
+{
+  "name": "kkm-bem-uny",
+  "version": "1.0.0",
+  "description": "Karir dan Karya Mahasiswa BEM KM UNY Website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"tinacms dev -c \"tina/config.js\"\" \"eleventy --serve\"",
+    "build": "tinacms build && eleventy",
+    "start": "eleventy --serve"
+  },
+  "keywords": ["eleventy", "tinacms", "kkm", "bem", "uny"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "tinacms": "^1.5.6",
+    "@tinacms/cli": "^1.5.12"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
