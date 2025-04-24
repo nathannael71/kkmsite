@@ -1,0 +1,14 @@
+{
+  "framework": "eleventy",
+  "buildCommand": "npm run build",
+  "outputDirectory": "_site",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev",
+  "github": {
+    "silent": true
+  },
+  "env": {
+    "TINA_CLIENT_ID": "@tina_client_id",
+    "TINA_TOKEN": "@tina_token"
+  }
+}
