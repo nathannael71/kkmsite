@@ -1,0 +1,109 @@
+<section id="contact" class="py-16 section-gradient-2 gradient-section">
+    <div class="main-container">
+        <div class="text-center mb-16">
+            <span class="text-sm uppercase tracking-wider text-blue-500 dark:text-blue-300">
+                {{ settings.contact.sectionLabel | default('Kontak Kami') }}
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-bold heading-apple text-apple-darkgray dark:text-white mb-6 fade-up">
+                {{ settings.contact.title | default('Get In Touch') }}
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto fade-up">
+                {{ settings.contact.description | default('Punya pertanyaan atau ingin berkolaborasi? Hubungi kami segera!') }}
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact info -->
+            <div class="fade-up">
+                <div class="bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg transition-apple h-full border border-white/20">
+                    <h3 class="text-2xl font-bold heading-apple mb-6 text-apple-darkgray dark:text-white">Connect With Us</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4 shrink-0">
+                                <i class="fab fa-instagram text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold heading-apple text-apple-darkgray dark:text-white">Instagram</h4>
+                                <p class="text-gray-600 dark:text-gray-300 mb-2">Follow us for updates</p>
+                                <a href="{{ settings.contact.contactInfo.instagramUrl | default('https://instagram.com/kkm.bemuny') }}" target="_blank" class="text-blue-500 dark:text-blue-300 font-medium">{{ settings.contact.contactInfo.instagram | default('@kkm.bemuny') }}</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4 shrink-0">
+                                <i class="far fa-envelope text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold heading-apple text-apple-darkgray dark:text-white">Email</h4>
+                                <p class="text-gray-600 dark:text-gray-300 mb-2">We'd love to hear from you</p>
+                                <a href="mailto:{{ settings.contact.contactInfo.email | default('kkmbemuny@gmail.com') }}" class="text-blue-500 dark:text-blue-300 font-medium">{{ settings.contact.contactInfo.email | default('kkmbemuny@gmail.com') }}</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4 shrink-0">
+                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold heading-apple text-apple-darkgray dark:text-white">Location</h4>
+                                <p class="text-gray-600 dark:text-gray-300 mb-2">Visit our office</p>
+                                <p class="text-apple-darkgray dark:text-white">{{ settings.contact.contactInfo.address | default('Student Center Building, Universitas Negeri Yogyakarta, Karangmalang, Yogyakarta') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact form -->
+            <div class="fade-up">
+                <div class="bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg transition-apple border border-white/20">
+                    <h3 class="text-2xl font-bold heading-apple mb-6 text-apple-darkgray dark:text-white">Send a Message</h3>
+                    
+                    {% if settings.contact.formAction %}
+                        <form id="contact-form" class="space-y-6" action="{{ settings.contact.formAction }}" method="POST">
+                    {% else %}
+                        <form id="contact-form" class="space-y-6">
+                    {% endif %}
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 backdrop-blur-lg text-apple-darkgray dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-base" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 backdrop-blur-lg text-apple-darkgray dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-base" required>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 backdrop-blur-lg text-apple-darkgray dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-base" required>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 backdrop-blur-lg text-apple-darkgray dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-base" required></textarea>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-3 bg-apple-blue text-white rounded-full btn-apple transition-apple font-medium" id="submit-button">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Success & Error Messages -->
+                    <div id="form-success" class="form-alert alert-success hidden">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Thank you! Your message has been sent successfully.</span>
+                    </div>
+                    
+                    <div id="form-error" class="form-alert alert-error hidden">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Oops! Something went wrong. Please try again later.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
