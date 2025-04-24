@@ -1,0 +1,271 @@
+backend:
+  name: git-gateway
+  branch: main # Sesuaikan dengan branch utama repository
+
+media_folder: "public/images/uploads" # Folder untuk menyimpan media
+public_folder: "/images/uploads" # URL publik untuk media
+
+# Konfigurasi untuk preview di local development
+local_backend: true
+
+# Tampilan admin
+site_url: https://kkm-bem-uny.netlify.app
+display_url: https://kkm-bem-uny.netlify.app
+logo_url: https://kkm-bem-uny.netlify.app/images/logo.png
+
+# Opsi editor
+editor:
+  preview: false # Nonaktifkan preview bawaan
+
+collections:
+  # Pengaturan Situs
+  - name: "settings"
+    label: "Pengaturan Situs"
+    files:
+      - name: "general"
+        label: "Pengaturan Umum"
+        file: "_data/settings.json"
+        fields:
+          - { label: "Judul Situs", name: "title", widget: "string" }
+          - { label: "Deskripsi Situs", name: "description", widget: "string" }
+          - { label: "Logo Situs", name: "logo", widget: "image", required: false }
+      
+      - name: "header"
+        label: "Pengaturan Header"
+        file: "_data/header.json"
+        fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subjudul", name: "subtitle", widget: "string" }
+          - { label: "Logo UNY", name: "unyLogo", widget: "image", required: false }
+          - { label: "Logo BEM", name: "bemLogo", widget: "image", required: false }
+          - label: "Menu Navigasi"
+            name: "navLinks"
+            widget: "list"
+            fields:
+              - { label: "Teks", name: "text", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Icon", name: "icon", widget: "string", hint: "Kelas icon Font Awesome, contoh: fa-home" }
+      
+      - name: "footer"
+        label: "Pengaturan Footer"
+        file: "_data/footer.json"
+        fields:
+          - { label: "Deskripsi", name: "description", widget: "text" }
+          - { label: "Logo UNY", name: "unyLogo", widget: "image", required: false }
+          - { label: "Logo BEM", name: "bemLogo", widget: "image", required: false }
+          - label: "Media Sosial"
+            name: "socialMedia"
+            widget: "list"
+            fields:
+              - { label: "Platform", name: "platform", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Icon", name: "icon", widget: "string", hint: "Kelas icon Font Awesome, contoh: fab fa-instagram" }
+          - label: "Link Cepat"
+            name: "quickLinks"
+            widget: "list"
+            fields:
+              - { label: "Teks", name: "text", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+          - label: "Informasi Kontak"
+            name: "contactInfo"
+            widget: "object"
+            fields:
+              - { label: "Alamat", name: "address", widget: "text" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Instagram", name: "instagram", widget: "string" }
+              - { label: "URL Instagram", name: "instagramUrl", widget: "string" }
+          - label: "Link Legal"
+            name: "legalLinks"
+            widget: "list"
+            fields:
+              - { label: "Teks", name: "text", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+          - { label: "Teks Copyright", name: "copyright", widget: "string" }
+  
+      - name: "hero"
+        label: "Pengaturan Hero Section"
+        file: "_data/hero.json"
+        fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Subjudul", name: "subtitle", widget: "string" }
+          - { label: "Teks Tombol", name: "buttonText", widget: "string" }
+          - { label: "URL Tombol", name: "buttonUrl", widget: "string" }
+          - label: "Slide"
+            name: "slides"
+            widget: "list"
+            fields:
+              - { label: "Gambar", name: "image", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
+      
+      - name: "about"
+        label: "Pengaturan About Section"
+        file: "_data/aboutSettings.json"
+        fields:
+          - { label: "Judul Section", name: "title", widget: "string" }
+          - { label: "Label Section", name: "sectionLabel", widget: "string", default: "Tentang Kami" }
+          - { label: "Deskripsi", name: "description", widget: "text" }
+      
+      - name: "programs"
+        label: "Pengaturan Programs Section"
+        file: "_data/programsSettings.json"
+        fields:
+          - { label: "Judul Section", name: "title", widget: "string" }
+          - { label: "Label Section", name: "sectionLabel", widget: "string", default: "Program Kami" }
+          - { label: "Deskripsi", name: "description", widget: "text" }
+      
+      - name: "team"
+        label: "Pengaturan Team Section"
+        file: "_data/teamSettings.json"
+        fields:
+          - { label: "Judul Section", name: "title", widget: "string" }
+          - { label: "Label Section", name: "sectionLabel", widget: "string", default: "Tim Kami" }
+          - { label: "Deskripsi", name: "description", widget: "text" }
+      
+      - name: "articles"
+        label: "Pengaturan Articles Section"
+        file: "_data/articlesSettings.json"
+        fields:
+          - { label: "Judul Section", name: "title", widget: "string" }
+          - { label: "Label Section", name: "sectionLabel", widget: "string", default: "Artikel Terbaru" }
+          - { label: "Deskripsi", name: "description", widget: "text" }
+          - { label: "Teks Tombol View All", name: "viewAllButtonText", widget: "string", default: "View All Articles" }
+          - { label: "URL Tombol View All", name: "viewAllButtonUrl", widget: "string", default: "/articles" }
+      
+      - name: "timeline"
+        label: "Pengaturan Timeline Section"
+        file: "_data/timelineSettings.json"
+        fields:
+          - { label: "Judul Section", name: "title", widget: "string" }
+          - { label: "Label Section", name: "sectionLabel", widget: "string", default: "Timeline Program" }
+          - { label: "Deskripsi", name: "description", widget: "text" }
+      
+      - name: "gallery"
+        label: "Pengaturan Gallery Section"
+        file: "_data/gallerySettings.json"
+        fields:
+          - { label: "Judul Section", name: "title", widget: "string" }
+          - { label: "Label Section", name: "sectionLabel", widget: "string", default: "Galeri Kegiatan" }
+          - { label: "Deskripsi", name: "description", widget: "text" }
+          - { label: "Teks Tombol View All", name: "viewAllButtonText", widget: "string", default: "View Full Gallery" }
+          - { label: "URL Tombol View All", name: "viewAllButtonUrl", widget: "string", default: "/gallery" }
+      
+      - name: "contact"
+        label: "Pengaturan Contact Section"
+        file: "_data/contact.json"
+        fields:
+          - { label: "Judul Section", name: "title", widget: "string" }
+          - { label: "Label Section", name: "sectionLabel", widget: "string", default: "Kontak Kami" }
+          - { label: "Deskripsi", name: "description", widget: "text" }
+          - { label: "Form Action URL", name: "formAction", widget: "string", required: false }
+          - label: "Informasi Kontak"
+            name: "contactInfo"
+            widget: "object"
+            fields:
+              - { label: "Instagram", name: "instagram", widget: "string" }
+              - { label: "URL Instagram", name: "instagramUrl", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Alamat", name: "address", widget: "text" }
+      
+      - name: "location"
+        label: "Pengaturan Location Section"
+        file: "_data/location.json"
+        fields:
+          - { label: "Judul Section", name: "title", widget: "string" }
+          - { label: "Label Section", name: "sectionLabel", widget: "string", default: "Lokasi Kami" }
+          - { label: "Deskripsi", name: "description", widget: "text" }
+          - { label: "Nama Lokasi", name: "locationName", widget: "string" }
+          - { label: "Alamat Lengkap", name: "fullAddress", widget: "text" }
+          - { label: "URL Map", name: "mapUrl", widget: "string", hint: "URL embed Google Maps" }
+          - { label: "URL Arah", name: "directionsUrl", widget: "string", hint: "URL Google Maps directions" }
+          - label: "CTA"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Judul", name: "title", widget: "string" }
+              - { label: "Deskripsi", name: "description", widget: "text" }
+              - { label: "Teks Tombol", name: "buttonText", widget: "string" }
+              - { label: "URL Tombol", name: "buttonUrl", widget: "string" }
+  
+  # About Items
+  - name: "about"
+    label: "About Items"
+    folder: "sections/about"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Urutan", name: "order", widget: "number", default: 1 }
+      - { label: "Icon", name: "icon", widget: "string", hint: "Kelas icon Font Awesome, contoh: fa-graduation-cap" }
+      - { label: "Warna Background Icon", name: "iconBg", widget: "string", default: "blue-500", hint: "Kelas warna Tailwind CSS" }
+      - { label: "Judul Konten", name: "contentTitle", widget: "string" }
+      - { label: "Deskripsi", name: "description", widget: "text" }
+  
+  # Programs
+  - name: "programs"
+    label: "Programs"
+    folder: "sections/programs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Deskripsi", name: "description", widget: "text" }
+      - { label: "Gambar", name: "image", widget: "image" }
+      - { label: "Status", name: "status", widget: "string", default: "Coming Soon" }
+      - { label: "Urutan", name: "order", widget: "number", default: 1 }
+  
+  # Team Members
+  - name: "team"
+    label: "Anggota Tim"
+    folder: "sections/team"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nama", name: "name", widget: "string" }
+      - { label: "Posisi", name: "position", widget: "string" }
+      - { label: "Foto", name: "photo", widget: "image" }
+      - { label: "Instagram", name: "instagram", widget: "string", required: false }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
+      - { label: "Urutan", name: "order", widget: "number", default: 1 }
+  
+  # Articles
+  - name: "articles"
+    label: "Artikel"
+    folder: "sections/articles"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Ringkasan", name: "excerpt", widget: "text" }
+      - { label: "Konten", name: "body", widget: "markdown" }
+      - { label: "Gambar", name: "image", widget: "image" }
+      - { label: "Penulis", name: "author", widget: "string" }
+      - { label: "Foto Penulis", name: "authorPhoto", widget: "image" }
+      - { label: "Tanggal", name: "date", widget: "datetime" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Urutan", name: "order", widget: "number", default: 1 }
+  
+  # Timeline Events
+  - name: "timeline"
+    label: "Timeline Events"
+    folder: "sections/timeline"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Tanggal", name: "date", widget: "string" }
+      - { label: "Deskripsi", name: "description", widget: "text" }
+      - { label: "Teks Tombol", name: "buttonText", widget: "string", default: "Coming Soon" }
+      - { label: "Urutan", name: "order", widget: "number", default: 1 }
+  
+  # Gallery Items
+  - name: "gallery"
+    label: "Gallery Items"
+    folder: "sections/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Tanggal", name: "date", widget: "string" }
+      - { label: "Gambar", name: "image", widget: "image" }
+      - { label: "Urutan", name: "order", widget: "number", default: 1 }
