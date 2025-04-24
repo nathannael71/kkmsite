@@ -14,14 +14,14 @@
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {% if collections.aboutItems %}
-                {% for item in collections.aboutItems | sort(false, false, 'data.order') %}
+                {% for item in collections.aboutItems | sort(false, false, 'order') %}
                     <div class="bg-white/70 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg transition-apple transform hover:-translate-y-2 fade-up border border-white/20">
-                        <div class="w-16 h-16 bg-{{ item.data.iconBg | default('blue-500') }} rounded-full flex items-center justify-center mb-6">
-                            <i class="fas {{ item.data.icon | default('fa-graduation-cap') }} text-white text-2xl"></i>
+                       <div class="w-16 h-16 bg-{{ item.iconBg | default('blue-500') }} rounded-full flex items-center justify-center mb-6">
+                            <i class="fas {{ item.icon | default('fa-graduation-cap') }} text-white text-2xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold heading-apple text-apple-darkgray dark:text-white mb-4">{{ item.data.contentTitle }}</h3>
-                        <p class="text-gray-600 dark:text-gray-300">
-                            {{ item.data.description }}
+                      <h3 class="text-xl font-bold heading-apple text-apple-darkgray dark:text-white mb-4">{{ item.contentTitle }}</h3>
+                      <p class="text-gray-600 dark:text-gray-300">
+                         {{ item.description }}
                         </p>
                     </div>
                 {% endfor %}
