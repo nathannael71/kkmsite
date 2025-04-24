@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "16"
+  NPM_VERSION = "9"
 
 [[plugins]]
   package = "@netlify/plugin-sitemap"
@@ -11,4 +12,6 @@
 [dev]
   command = "npm run dev"
   port = 8080
+  targetPort = 8080
   publish = "_site"
+  framework = "#custom"
