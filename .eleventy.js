@@ -1,47 +1,61 @@
 module.exports = function(eleventyConfig) {
-  // Pass-through file copy untuk assets dan admin
+  // Pass-through file copy untuk assets dan admin panel
   eleventyConfig.addPassthroughCopy("public");
   eleventyConfig.addPassthroughCopy("admin");
-  
-  // Collections untuk konten yang bisa diedit
+
+  // Untuk memproses konten JSON
+  eleventyConfig.addDataExtension("json", contents => JSON.parse(contents));
+
+  // Collection untuk setiap bagian (pakai JSON)
   eleventyConfig.addCollection("aboutItems", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("sections/about/*.md");
-  });
-  
-  eleventyConfig.addCollection("programItems", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("sections/programs/*.md");
-  });
-  
-  eleventyConfig.addCollection("teamMembers", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("sections/team/*.md");
-  });
-  
-  eleventyConfig.addCollection("articles", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("sections/articles/*.md");
-  });
-  
-  eleventyConfig.addCollection("timelineEvents", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("sections/timeline/*.md");
-  });
-  
-  eleventyConfig.addCollection("galleryItems", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("sections/gallery/*.md");
-  });
-  
-  // Untuk memproses konten dari JSON
-  eleventyConfig.addDataExtension("json", contents => {
-    return JSON.parse(contents);
+    return collectionApi.getFilteredByGlob("content/sections/about/*.json");
   });
 
-  // Konfigurasi dasar Eleventy
+  eleventyConfig.addCollection("programItems", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/programs/*.json");
+  });
+
+  eleventyConfig.addCollection("teamMembers", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/team/*.json");
+  });
+
+  eleventyConfig.addCollection("articles", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/articles/*.json");
+  });
+
+  eleventyConfig.addCollection("timelineEvents", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/timeline/*.json");
+  });
+
+  eleventyConfig.addCollection("galleryItems", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/gallery/*.json");
+  });
+
+  eleventyConfig.addCollection("contactInfo", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/contact/*.json");
+  });
+
+  eleventyConfig.addCollection("locationData", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/location/*.json");
+  });
+
+  eleventyConfig.addCollection("header", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/header.json");
+  });
+
+  eleventyConfig.addCollection("footer", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content/sections/footer.json");
+  });
+
+  // Konfigurasi utama Eleventy
   return {
     dir: {
       input: "src",
       output: "_site",
-      includes: "../_includes",
+      includes: "../partials",
       data: "../_data"
     },
-    templateFormats: ["njk", "md", "html"],
+    templateFormats: ["njk", "html", "json"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk"
   };
