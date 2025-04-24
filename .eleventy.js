@@ -51,7 +51,7 @@ module.exports = function(eleventyConfig) {
   // Konfigurasi utama Eleventy
   return {
     dir: {
-      input: "src",
+      input: ".",
       output: "_site",
       includes: "../_includes",
       data: "../_data"
