@@ -12,6 +12,7 @@ module.exports = function(eleventyConfig) {
     const items = collectionApi.getFilteredByGlob("content/sections/about/*.json");
     console.log("About Items found:", items.length); // Debug ke console
     return items;
+  eleventyConfig.addWatchTarget("content/sections/about");
   });
 
   // COLLECTION: Lainnya
@@ -50,7 +51,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("footer", function(collectionApi) {
     return collectionApi.getFilteredByGlob("content/sections/footer.json");
   });
-
+  eleventyConfig.ignores = eleventyConfig.ignores || [];
+  eleventyConfig.ignores = eleventyConfig.ignores.filter(i => i !== "**/*.json"); // pastikan JSON tidak diabaikan
   // Final return
   return {
     dir: {
