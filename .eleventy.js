@@ -14,6 +14,8 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("programItems", function(collectionApi) {
     return collectionApi.getFilteredByGlob("content/sections/programs/*.json");
+    console.log("About Items found:", items.length);
+  return items;
   });
 
   eleventyConfig.addCollection("teamMembers", function(collectionApi) {
