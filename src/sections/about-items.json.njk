@@ -1,0 +1,5 @@
+[
+  {% for item in collections.aboutItems %}
+    {{ item.data | dump }}{% if not loop.last %},{% endif %}
+  {% endfor %}
+]
