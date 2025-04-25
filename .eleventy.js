@@ -9,7 +9,7 @@ module.exports = function(eleventyConfig) {
 
   // Collection untuk setiap bagian (pakai JSON)
   eleventyConfig.addCollection("aboutItems", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("content/sections/about/*.json");
+    return collectionApi.getFilteredByGlob("./content/sections/about/*.json");
   });
 
   eleventyConfig.addCollection("programItems", function(collectionApi) {
