@@ -8,6 +8,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addDataExtension("json", contents => JSON.parse(contents));
 
   // Collection untuk setiap bagian (pakai JSON)
+  eleventyConfig.addPassthroughCopy("content");
+  
   eleventyConfig.addCollection("aboutItems", function(collectionApi) {
     return collectionApi.getFilteredByGlob("./content/sections/about/*.json");
   });
