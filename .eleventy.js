@@ -1,23 +1,22 @@
 module.exports = function(eleventyConfig) {
-  // Pass-through file copy untuk assets dan admin panel
+  // Passthrough folders
   eleventyConfig.addPassthroughCopy("public");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("content");
-  
-  // Untuk memproses konten JSON
+
+  // Enable JSON file parsing
   eleventyConfig.addDataExtension("json", contents => JSON.parse(contents));
 
-  // Collection untuk setiap bagian (pakai JSON)
-  eleventyConfig.addPassthroughCopy("content");
-  
+  // COLLECTION: About
   eleventyConfig.addCollection("aboutItems", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("./content/sections/about/*.json");
+    const items = collectionApi.getFilteredByGlob("content/sections/about/*.json");
+    console.log("About Items found:", items.length); // Debug ke console
+    return items;
   });
 
+  // COLLECTION: Lainnya
   eleventyConfig.addCollection("programItems", function(collectionApi) {
     return collectionApi.getFilteredByGlob("content/sections/programs/*.json");
-    console.log("About Items found:", items.length);
-  return items;
   });
 
   eleventyConfig.addCollection("teamMembers", function(collectionApi) {
@@ -52,7 +51,7 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("content/sections/footer.json");
   });
 
-  // Konfigurasi utama Eleventy
+  // Final return
   return {
     dir: {
       input: "src",
