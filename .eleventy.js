@@ -2,13 +2,8 @@ module.exports = function(eleventyConfig) {
   // Salin asset statis
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");
-  
-  // Tambahkan passthrough untuk node_modules yang dibutuhkan oleh CMS
-  eleventyConfig.addPassthroughCopy({
-    "node_modules/netlify-cms-app/dist": "node_modules/netlify-cms-app/dist"
-  });
 
-  // Transformasi dan filter yang sudah ada
+  // Tambahkan transformasi untuk mengatur output
   eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
     // Bypass untuk non-HTML files
     if (!outputPath || !outputPath.endsWith(".html")) {
@@ -19,6 +14,7 @@ module.exports = function(eleventyConfig) {
     return content;
   });
 
+  // Tambahkan filter tanggal
   eleventyConfig.addFilter("formatDate", function(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('id-ID', { 
