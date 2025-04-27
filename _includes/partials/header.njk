@@ -1,30 +1,23 @@
+<!-- Header -->
 <header class="fixed w-full z-50 transition-apple glassmorphism light border-b border-gray-200 dark:border-gray-800">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div class="flex justify-between items-center">
             <!-- Logo and title -->
             <div class="flex items-center">
                 <div class="flex space-x-2 mr-4">
-                    <!-- UNY logo -->
-                    <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center overflow-hidden">
-                        {% if settings.header.unyLogo %}
-                            <img src="{{ settings.header.unyLogo }}" alt="UNY Logo" class="w-full h-full object-cover">
-                        {% else %}
-                            <span class="text-xs font-bold">UNY</span>
-                        {% endif %}
+                    <!-- Placeholder for UNY logo -->
+                    <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                        <span class="text-xs font-bold">UNY</span>
                     </div>
-                    <!-- BEM KM logo -->
-                    <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center overflow-hidden">
-                        {% if settings.header.bemLogo %}
-                            <img src="{{ settings.header.bemLogo }}" alt="BEM Logo" class="w-full h-full object-cover">
-                        {% else %}
-                            <span class="text-xs font-bold">BEM</span>
-                        {% endif %}
+                    <!-- Placeholder for BEM KM logo -->
+                    <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                        <span class="text-xs font-bold">BEM</span>
                     </div>
                 </div>
                 <div>
-                    <h1 class="text-lg sm:text-xl font-bold heading-apple hidden sm:block">{{ settings.header.title | default('KARIR DAN KARYA MAHASISWA') }}</h1>
-                    <h1 class="text-lg font-bold heading-apple sm:hidden">{{ settings.header.title | default('KARIR DAN KARYA MAHASISWA') }}</h1>
-                    <p class="text-xs text-apple-gray">{{ settings.header.subtitle | default('BEM KM Universitas Negeri Yogyakarta') }}</p>
+                    <h1 class="text-lg sm:text-xl font-bold heading-apple hidden sm:block">{{ settings.header.title | default("KARIR DAN KARYA MAHASISWA") }}</h1>
+                    <h1 class="text-lg font-bold heading-apple sm:hidden">{{ settings.header.title | default("KARIR DAN KARYA MAHASISWA") }}</h1>
+                    <p class="text-xs text-apple-gray">{{ settings.header.subtitle | default("BEM KM Universitas Negeri Yogyakarta") }}</p>
                 </div>
             </div>
 
@@ -43,7 +36,7 @@
 <!-- Sidebar overlay -->
 <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-<!-- Mobile sidebar menu -->
+<!-- Mobile sidebar menu - Redesigned with X button and compact layout -->
 <div id="sidebar-menu" class="glassmorphism">
     <!-- Close button (X) -->
     <button id="sidebar-close" class="close-btn">
@@ -57,48 +50,12 @@
     
     <!-- Menu links -->
     <div class="menu-links">
-        {% if settings.header.navLinks %}
-            {% for link in settings.header.navLinks %}
-                <a href="{{ link.url }}" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                    <div class="menu-icon"><i class="fas {{ link.icon }}"></i></div>
-                    <span>{{ link.text }}</span>
-                </a>
-            {% endfor %}
-        {% else %}
-            <!-- Default navigation links if no CMS data -->
-            <a href="#home" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                <div class="menu-icon"><i class="fas fa-home"></i></div>
-                <span>Home</span>
-            </a>
-            <a href="#about" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                <div class="menu-icon"><i class="fas fa-info-circle"></i></div>
-                <span>About</span>
-            </a>
-            <a href="#programs" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                <div class="menu-icon"><i class="fas fa-box"></i></div>
-                <span>Program</span>
-            </a>
-            <a href="#team" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                <div class="menu-icon"><i class="fas fa-users"></i></div>
-                <span>Team</span>
-            </a>
-            <a href="#timeline" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                <div class="menu-icon"><i class="fas fa-calendar-alt"></i></div>
-                <span>Timeline</span>
-            </a>
-            <a href="#gallery" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                <div class="menu-icon"><i class="fas fa-images"></i></div>
-                <span>Gallery</span>
-            </a>
-            <a href="#contact" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                <div class="menu-icon"><i class="fas fa-envelope"></i></div>
-                <span>Contact</span>
-            </a>
-            <a href="#location" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-                <div class="menu-icon"><i class="fas fa-map-marker-alt"></i></div>
-                <span>Location</span>
-            </a>
-        {% endif %}
+        {% for item in settings.header.menuItems %}
+        <a href="{{ item.url }}" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+            <div class="menu-icon"><i class="fas fa-{{ item.icon }}"></i></div>
+            <span>{{ item.label }}</span>
+        </a>
+        {% endfor %}
     </div>
     
     <!-- Dark mode toggle -->
