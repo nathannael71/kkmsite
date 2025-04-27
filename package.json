@@ -1,4 +1,4 @@
-{
+{{
   "name": "kkmbemunysite",
   "version": "1.0.0",
   "description": "Website Karir dan Karya Mahasiswa BEM KM UNY",
@@ -20,7 +20,6 @@
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
     "netlify-cms-app": "^2.15.72",
-    "@netlify/plugin-netlify-cms": "^1.4.5",
     "sharp": "^0.32.6"
   },
   "devDependencies": {
