@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel | KKM BEM KM UNY</title>
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Import Netlify CMS dari package lokal -->
-  <script src="/node_modules/netlify-cms-app/dist/netlify-cms-app.js"></script>
+  <!-- Netlify CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.15.72/dist/netlify-cms.js"></script>
   <script>
-    // Jika Anda memiliki konfigurasi tambahan untuk CMS, Anda dapat menambahkannya di sini
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
