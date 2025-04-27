@@ -5,13 +5,21 @@
             <!-- Logo and title -->
             <div class="flex items-center">
                 <div class="flex space-x-2 mr-4">
-                    <!-- Placeholder for UNY logo -->
-                    <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
-                        <span class="text-xs font-bold">UNY</span>
+                    <!-- Logo UNY dinamis -->
+                    <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center overflow-hidden">
+                        {% if settings.branding.unyLogo.image %}
+                            <img src="{{ settings.branding.unyLogo.image }}" alt="{{ settings.branding.unyLogo.alt }}" class="w-full h-full object-contain">
+                        {% else %}
+                            <span class="text-xs font-bold">UNY</span>
+                        {% endif %}
                     </div>
-                    <!-- Placeholder for BEM KM logo -->
-                    <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
-                        <span class="text-xs font-bold">BEM</span>
+                    <!-- Logo BEM KM dinamis -->
+                    <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center overflow-hidden">
+                        {% if settings.branding.bemLogo.image %}
+                            <img src="{{ settings.branding.bemLogo.image }}" alt="{{ settings.branding.bemLogo.alt }}" class="w-full h-full object-contain">
+                        {% else %}
+                            <span class="text-xs font-bold">BEM</span>
+                        {% endif %}
                     </div>
                 </div>
                 <div>
@@ -32,41 +40,3 @@
         </div>
     </div>
 </header>
-
-<!-- Sidebar overlay -->
-<div id="sidebar-overlay" class="sidebar-overlay"></div>
-
-<!-- Mobile sidebar menu - Redesigned with X button and compact layout -->
-<div id="sidebar-menu" class="glassmorphism">
-    <!-- Close button (X) -->
-    <button id="sidebar-close" class="close-btn">
-        <i class="fas fa-times"></i>
-    </button>
-    
-    <!-- Sidebar header -->
-    <div class="sidebar-header">
-        <h3 class="text-lg font-semibold heading-apple text-black dark:text-white">Menu</h3>
-    </div>
-    
-    <!-- Menu links -->
-    <div class="menu-links">
-        {% for item in settings.header.menuItems %}
-        <a href="{{ item.url }}" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
-            <div class="menu-icon"><i class="fas fa-{{ item.icon }}"></i></div>
-            <span>{{ item.label }}</span>
-        </a>
-        {% endfor %}
-    </div>
-    
-    <!-- Dark mode toggle -->
-    <div id="darkmode-toggle-container">
-        <div class="menu-icon" style="background-color: #F4A83A;"><i class="fas fa-sun"></i></div>
-        <span class="font-semibold heading-apple">Dark Mode</span>
-        <button id="darkmode-toggle" class="ml-auto w-12 h-7 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center transition-apple p-1">
-            <div id="darkmode-toggle-circle" class="w-5 h-5 bg-white rounded-full shadow-md transform dark:translate-x-5 transition-apple flex justify-center items-center">
-                <i class="fas fa-sun text-yellow-500 dark:hidden text-xs"></i>
-                <i class="fas fa-moon text-blue-300 hidden dark:block text-xs"></i>
-            </div>
-        </button>
-    </div>
-</div>
