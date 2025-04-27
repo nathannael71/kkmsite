@@ -2,9 +2,6 @@
   publish = "_site"
   command = "npm run build"
 
-# Konfigurasi untuk Netlify CMS
-[[plugins]]
-  package = "@netlify/plugin-netlify-cms"
 
 # Redirect dan rewrite rules
 [[redirects]]
