@@ -1,9 +1,0 @@
-{
-  "name": "Jane Doe",
-  "position": "Head of Department",
-  "photo": "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
-  "instagram": "https://instagram.com/jane.doe",
-  "email": "jane.doe@example.com",
-  "linkedin": "https://linkedin.com/in/janedoe",
-  "order": 1
-}
