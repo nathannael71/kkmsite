@@ -1,17 +1,26 @@
 {
-  "name": "kkm-bem-uny",
+  "name": "kkmbemunysite",
   "version": "1.0.0",
-  "description": "Karir dan Karya Mahasiswa BEM KM UNY Website",
+  "description": "Website Karir dan Karya Mahasiswa BEM KM UNY",
   "main": "index.js",
   "scripts": {
-    "dev": "eleventy --serve",
     "build": "eleventy",
+    "start": "eleventy --serve",
+    "dev": "eleventy --serve",
     "debug": "DEBUG=* eleventy"
   },
-  "keywords": ["eleventy", "netlify-cms", "kkm", "bem", "uny"],
-  "author": "",
+  "keywords": [
+    "bem",
+    "uny",
+    "kkm",
+    "mahasiswa"
+  ],
+  "author": "BEM KM UNY",
   "license": "MIT",
   "dependencies": {
     "@11ty/eleventy": "^2.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
   }
 }
