@@ -2,16 +2,19 @@
   publish = "_site"
   command = "npm run build"
 
-[build.environment]
-  NODE_VERSION = "16"
-  NPM_VERSION = "9"
-
+# Konfigurasi untuk Netlify CMS
 [[plugins]]
-  package = "@netlify/plugin-sitemap"
+  package = "@netlify/plugin-netlify-cms"
 
-[dev]
-  command = "npm run dev"
-  port = 8080
-  targetPort = 8080
-  publish = "_site"
-  framework = "#custom"
+# Redirect dan rewrite rules
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+  force = true
+
+# Redirect untuk akses ke homepage
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
