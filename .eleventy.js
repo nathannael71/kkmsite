@@ -1,40 +1,41 @@
 module.exports = function(eleventyConfig) {
-  // Salin asset statis
-  eleventyConfig.addPassthroughCopy("assets");
-  eleventyConfig.addPassthroughCopy("admin");
-
-  // Tambahkan transformasi untuk mengatur output
-  eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
-    // Bypass untuk non-HTML files
-    if (!outputPath || !outputPath.endsWith(".html")) {
-      return content;
-    }
-    
-    // Mengembalikan konten tanpa minifikasi
-    return content;
+  // Pass through static files
+  eleventyConfig.addPassthroughCopy("src/css");
+  eleventyConfig.addPassthroughCopy("src/js");
+  eleventyConfig.addPassthroughCopy("src/admin");
+  eleventyConfig.addPassthroughCopy("src/images");
+  
+  // Custom collections if needed
+  eleventyConfig.addCollection("teamMembers", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/_data/team/*.json");
   });
-
-  // Tambahkan filter tanggal
-  eleventyConfig.addFilter("formatDate", function(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('id-ID', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
+  
+  eleventyConfig.addCollection("programs", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/_data/programs/*.json");
   });
-
-  // Return konfigurasi Eleventy
+  
+  eleventyConfig.addCollection("articles", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/_data/articles/*.json");
+  });
+  
+  eleventyConfig.addCollection("timelineEvents", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/_data/timeline/*.json");
+  });
+  
+  eleventyConfig.addCollection("galleryItems", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/_data/gallery/*.json");
+  });
+  
+  // Return your configuration object
   return {
     dir: {
-      input: ".",
+      input: "src",
       output: "_site",
       includes: "_includes",
       data: "_data"
     },
-    templateFormats: ["njk", "md", "html"],
-    markdownTemplateEngine: "njk",
+    templateFormats: ["html", "njk", "md"],
     htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk"
+    markdownTemplateEngine: "njk"
   };
 };
