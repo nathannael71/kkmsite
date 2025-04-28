@@ -1,52 +1,30 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel | KKM BEM KM UNY</title>
-  
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  
-  <!-- Styles for admin interface -->
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-    .custom-logo {
-      width: auto;
-      height: 40px;
-      margin: 10px;
-    }
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager | BEM KM UNY</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.15.72/dist/netlify-cms.js"></script>
-  
-  <!-- Custom admin scripts -->
-  <script>
-    // Initialize Netlify Identity
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
+    <!-- Include the script that builds the page and powers Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+        // Initialize Netlify Identity
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
         }
-      });
-    }
 
-    // Custom preview styles
-    CMS.registerPreviewStyle("/assets/css/style.css");
-    
-    // Handle authentication errors
-    window.addEventListener('error', function(e) {
-      console.error('Authentication Error:', e);
-      if (e.message.includes('authentication')) {
-        alert('Please check your authentication settings in Netlify dashboard');
-      }
-    });
-  </script>
+        // Preview styles for Netlify CMS
+        CMS.registerPreviewStyle('https://cdn.tailwindcss.com');
+        CMS.registerPreviewStyle('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+        CMS.registerPreviewStyle('/css/styles.css');
+    </script>
 </body>
 </html>
