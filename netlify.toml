@@ -2,36 +2,16 @@
   publish = "_site"
   command = "npm run build"
 
-# Header settings untuk CORS dan security
-[[headers]]
-  for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    
-# Konfigurasi untuk admin panel
-[[headers]]
-  for = "/admin/*"
-    [headers.values]
-    Basic-Auth = "Access-Control-Allow-Origin: *"
-    X-Frame-Options = "SAMEORIGIN"
-
-# Redirect dan rewrite rules
 [[redirects]]
   from = "/admin/*"
   to = "/admin/:splat"
   status = 200
-  force = true
 
-[[redirects]]
-  from = "/_data/*"
-  to = "/_data/:splat"
-  status = 200
-  force = true
-
-# Redirect untuk akses ke homepage
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://v3.fal.media https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://qph.cf2.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com https://identity.netlify.com https://api.netlify.com; frame-src 'self' https://www.youtube.com https://www.google.com https://trytako.com https://identity.netlify.com; img-src 'self' data: blob: https://images.unsplash.com https://picsum.photos; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://identity.netlify.com https://unpkg.com;"
