@@ -1,10 +1,25 @@
 backend:
   name: git-gateway
   branch: main
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: '[skip ci] Upload "{{path}}"'
+    deleteMedia: '[skip ci] Delete "{{path}}"'
 
-# Media folder tempat CMS menyimpan media yang diunggah
+# Local backend untuk development
+local_backend: true
+
+# Media dan public folder settings
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
+
+# Site URL configuration
+site_url: https://kkmbemunysite.netlify.app
+display_url: https://kkmbemunysite.netlify.app
+site_url: https://kkmbemunysite.vercel.app
+display_url: https://kkmbemunysite.vercel.app
 
 # Aktivasi publish mode editorial
 publish_mode: editorial_workflow
