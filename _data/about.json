@@ -4,19 +4,19 @@
   "description": "Kami hadir untuk menjembatani aspirasi dan peluang Anda. Baik itu pengembangan karir, ekspresi kreatif, atau jaringan profesional, misi kami adalah mendukung mahasiswa dalam menemukan passion dan mencapai tujuan mereka.",
   "features": [
     {
+      "icon": "fa-graduation-cap",
       "title": "Skill Development",
-      "description": "Memberikan pelatihan dan sumber daya untuk mengembangkan keterampilan teknis dan soft skill yang relevan dengan kebutuhan dunia kerja modern.",
-      "icon": "graduation-cap"
+      "description": "Memberikan pelatihan dan sumber daya untuk mengembangkan keterampilan teknis dan soft skill yang relevan dengan kebutuhan dunia kerja modern."
     },
     {
+      "icon": "fa-paintbrush",
       "title": "Creative Outlet",
-      "description": "Menyediakan platform bagi mahasiswa untuk mengekspresikan kreativitas mereka melalui berbagai proyek dan kolaborasi yang inovatif.",
-      "icon": "paintbrush"
+      "description": "Menyediakan platform bagi mahasiswa untuk mengekspresikan kreativitas mereka melalui berbagai proyek dan kolaborasi yang inovatif."
     },
     {
+      "icon": "fa-network-wired",
       "title": "Career Networking",
-      "description": "Menghubungkan mahasiswa dengan profesional industri dan pemberi kerja potensial untuk memfasilitasi peluang karir yang berkelanjutan.",
-      "icon": "network-wired"
+      "description": "Menghubungkan mahasiswa dengan profesional industri dan pemberi kerja potensial untuk memfasilitasi peluang karir yang berkelanjutan."
     }
   ]
 }
