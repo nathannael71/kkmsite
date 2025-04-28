@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://qph.cf2.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://www.google.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KKM BEM KM UNY</title>
+    <title>Karir dan Karya Mahasiswa | BEM KM UNY</title>
+    <meta name="description" content="Departemen Karir dan Karya Mahasiswa BEM KM Universitas Negeri Yogyakarta - Empowering students through career development and creative outlets">
+    <meta name="keywords" content="BEM KM UNY, Karir Mahasiswa, Karya Mahasiswa, UNY, Universitas Negeri Yogyakarta">
     
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -52,8 +52,7 @@
     <!-- Netlify Identity for CMS -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
-    <!-- Style yang dipindahkan dari file asli ke file terpisah -->
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="bg-white dark:bg-apple-darkgray text-apple-darkgray dark:text-white transition-colors duration-500 overflow-x-hidden">
     <!-- Scroll to top button -->
@@ -61,17 +60,80 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    {% include "header.njk" %}
+    {% include "partials/header.njk" %}
+    
+    <!-- Sidebar overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Mobile sidebar menu -->
+    <div id="sidebar-menu" class="glassmorphism">
+        <!-- Close button (X) -->
+        <button id="sidebar-close" class="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- Sidebar header -->
+        <div class="sidebar-header">
+            <h3 class="text-lg font-semibold heading-apple text-black dark:text-white">Menu</h3>
+        </div>
+        
+        <!-- Menu links -->
+        <div class="menu-links">
+            <a href="#home" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+                <div class="menu-icon"><i class="fas fa-home"></i></div>
+                <span>Home</span>
+            </a>
+            <a href="#about" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+                <div class="menu-icon"><i class="fas fa-info-circle"></i></div>
+                <span>About</span>
+            </a>
+            <a href="#programs" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+                <div class="menu-icon"><i class="fas fa-box"></i></div>
+                <span>Program</span>
+            </a>
+            <a href="#team" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+                <div class="menu-icon"><i class="fas fa-users"></i></div>
+                <span>Team</span>
+            </a>
+            <a href="#timeline" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+                <div class="menu-icon"><i class="fas fa-calendar-alt"></i></div>
+                <span>Timeline</span>
+            </a>
+            <a href="#gallery" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+                <div class="menu-icon"><i class="fas fa-images"></i></div>
+                <span>Gallery</span>
+            </a>
+            <a href="#contact" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+                <div class="menu-icon"><i class="fas fa-envelope"></i></div>
+                <span>Contact</span>
+            </a>
+            <a href="#location" class="font-semibold heading-apple hover:text-apple-blue transition-apple">
+                <div class="menu-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <span>Location</span>
+            </a>
+        </div>
+        
+        <!-- Dark mode toggle -->
+        <div id="darkmode-toggle-container">
+            <div class="menu-icon" style="background-color: #F4A83A;"><i class="fas fa-sun"></i></div>
+            <span class="font-semibold heading-apple">Dark Mode</span>
+            <button id="darkmode-toggle" class="ml-auto w-12 h-7 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center transition-apple p-1">
+                <div id="darkmode-toggle-circle" class="w-5 h-5 bg-white rounded-full shadow-md transform dark:translate-x-5 transition-apple flex justify-center items-center">
+                    <i class="fas fa-sun text-yellow-500 dark:hidden text-xs"></i>
+                    <i class="fas fa-moon text-blue-300 hidden dark:block text-xs"></i>
+                </div>
+            </button>
+        </div>
+    </div>
 
     <!-- Main content -->
     <main>
         {{ content | safe }}
     </main>
 
-    {% include "footer.njk" %}
+    {% include "partials/footer.njk" %}
 
-    <!-- Script yang dipindahkan dari file asli ke file terpisah -->
-    <script src="/assets/js/scripts.js"></script>
+    <script src="/js/scripts.js"></script>
 
     <!-- Script untuk Netlify Identity -->
     <script>
