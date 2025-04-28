@@ -2,11 +2,31 @@
   publish = "_site"
   command = "npm run build"
 
+# Header settings untuk CORS dan security
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    
+# Konfigurasi untuk admin panel
+[[headers]]
+  for = "/admin/*"
+    [headers.values]
+    Basic-Auth = "Access-Control-Allow-Origin: *"
+    X-Frame-Options = "SAMEORIGIN"
 
 # Redirect dan rewrite rules
 [[redirects]]
   from = "/admin/*"
   to = "/admin/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/_data/*"
+  to = "/_data/:splat"
   status = 200
   force = true
 
