@@ -9,18 +9,25 @@ export default function Layout({ children, settings }) {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
     
-    // Toggle body overflow
+    // Toggle body overflow untuk mencegah scroll saat sidebar terbuka
     if (!sidebarOpen) {
-      document.body.classList.add('overflow-hidden');
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.classList.remove('overflow-hidden');
+      document.body.style.overflow = '';
     }
   };
   
   const closeSidebar = () => {
     setSidebarOpen(false);
-    document.body.classList.remove('overflow-hidden');
+    document.body.style.overflow = '';
   };
+
+  // Pastikan sidebar tertutup saat ganti halaman
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   // Initialize animations when component mounts
   useEffect(() => {
