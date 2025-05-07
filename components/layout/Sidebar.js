@@ -20,6 +20,40 @@ export default function Sidebar({ open, settings, closeSidebar }) {
   const overlay = useRef(null);
   const darkmodeToggle = useRef(null);
   
+  // CSS styling yang benar - pastikan sidebar tersembunyi secara default
+  const sidebarStyle = {
+    position: 'fixed',
+    top: 0,
+    right: 0, // Sidebar muncul dari kanan
+    width: '270px',
+    maxWidth: '80%',
+    height: '100vh',
+    transform: open ? 'translateX(0)' : 'translateX(100%)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    backgroundColor: 'rgba(28, 28, 30, 0.8)',
+    borderLeft: '1px solid rgba(255, 255, 255, 0.1)',
+    zIndex: 50,
+    transition: 'transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)',
+    padding: '1.5rem',
+    overflowY: 'auto'
+  };
+  
+  const overlayStyle = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100vh',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backdropFilter: 'blur(5px)',
+    WebkitBackdropFilter: 'blur(5px)',
+    opacity: open ? 1 : 0,
+    pointerEvents: open ? 'auto' : 'none',
+    transition: 'opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)',
+    zIndex: 39
+  };
+  
   // Close sidebar when clicking outside
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -72,22 +106,34 @@ export default function Sidebar({ open, settings, closeSidebar }) {
       {/* Sidebar overlay */}
       <div 
         ref={overlay}
-        id="sidebar-overlay" 
-        className={`sidebar-overlay ${open ? 'active' : ''}`}
+        style={overlayStyle}
+        onClick={closeSidebar}
       ></div>
 
-      {/* Mobile sidebar menu */}
+      {/* Mobile sidebar menu - gunakan inline styles untuk memastikan style bekerja */}
       <div 
         ref={sidebar}
-        id="sidebar-menu" 
-        className={`glassmorphism ${open ? 'translate-x-0' : ''}`}
+        style={sidebarStyle}
       >
         {/* Close button (X) */}
         <button 
-          id="sidebar-close" 
           className="close-btn"
           onClick={closeSidebar}
           aria-label="Close Menu"
+          style={{
+            position: 'absolute',
+            top: '1rem',
+            right: '1rem',
+            width: '30px',
+            height: '30px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '50%',
+            color: 'white',
+            transition: 'all 0.3s ease'
+          }}
         >
           <FontAwesomeIcon icon={faTimes} />
         </button>
@@ -105,8 +151,27 @@ export default function Sidebar({ open, settings, closeSidebar }) {
               href={item.url} 
               className="font-semibold heading-apple hover:text-apple-blue transition-apple"
               onClick={closeSidebar}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '8px 0',
+                fontSize: '16px',
+                fontWeight: '600',
+                color: 'white'
+              }}
             >
-              <div className="menu-icon">
+              <div className="menu-icon" style={{
+                backgroundColor: '#2871e6',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '32px',
+                height: '32px',
+                borderRadius: '8px',
+                color: 'white',
+                fontSize: '16px'
+              }}>
                 <FontAwesomeIcon icon={getIcon(item.icon)} />
               </div>
               <span>{item.label}</span>
@@ -115,21 +180,48 @@ export default function Sidebar({ open, settings, closeSidebar }) {
         </div>
         
         {/* Dark mode toggle */}
-        <div id="darkmode-toggle-container">
-          <div className="menu-icon" style={{ backgroundColor: '#F4A83A' }}>
+        <div id="darkmode-toggle-container" style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          backgroundColor: 'rgba(60, 60, 67, 0.5)',
+          padding: '10px 12px',
+          borderRadius: '12px',
+          marginTop: '20px'
+        }}>
+          <div className="menu-icon" style={{ backgroundColor: '#F4A83A', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', color: 'white' }}>
             <FontAwesomeIcon icon={faSun} />
           </div>
-          <span className="font-semibold heading-apple">Dark Mode</span>
+          <span className="font-semibold heading-apple" style={{color: 'white'}}>Dark Mode</span>
           <button 
             ref={darkmodeToggle}
-            id="darkmode-toggle" 
-            className="ml-auto w-12 h-7 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center transition-apple p-1"
             onClick={toggleDarkMode}
             aria-label="Toggle Dark Mode"
+            style={{
+              marginLeft: 'auto',
+              width: '48px',
+              height: '28px',
+              borderRadius: '9999px',
+              background: 'rgba(120, 120, 128, 0.5)',
+              display: 'flex',
+              alignItems: 'center',
+              padding: '4px',
+              transition: 'all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)'
+            }}
           >
-            <div id="darkmode-toggle-circle" className="w-5 h-5 bg-white rounded-full shadow-md transform dark:translate-x-5 transition-apple flex justify-center items-center">
-              <FontAwesomeIcon icon={faSun} className="text-yellow-500 dark:hidden text-xs" />
-              <FontAwesomeIcon icon={faMoon} className="text-blue-300 hidden dark:block text-xs" />
+            <div style={{
+              width: '20px',
+              height: '20px',
+              background: 'white',
+              borderRadius: '9999px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+              transform: document.documentElement.classList.contains('dark') ? 'translateX(20px)' : 'translateX(0)',
+              transition: 'transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <FontAwesomeIcon icon={document.documentElement.classList.contains('dark') ? faMoon : faSun} style={{color: document.documentElement.classList.contains('dark') ? '#5d8af5' : '#f6ad37', fontSize: '12px'}} />
             </div>
           </button>
         </div>
