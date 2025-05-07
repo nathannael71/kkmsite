@@ -98,7 +98,7 @@ export default function Header({ settings, toggleSidebar }) {
             </div>
           </div>
 
-          {/* Menu toggle button */}
+          {/* Menu toggle button - pastikan ini berfungsi dengan benar */}
           <button
             id="menu-toggle"
             className="p-2 focus:outline-none z-50"
